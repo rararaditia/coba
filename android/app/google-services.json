@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "229911833530",
+    "project_id": "docuserv-31512",
+    "storage_bucket": "docuserv-31512.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229911833530:android:523f64925be05094764b83",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI9yX18K2scCbCUoRUQFBvZbctuaemcnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
