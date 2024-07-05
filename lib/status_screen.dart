@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'revisipermohonan.dart'; // Make sure to import the new screen
 
 class StatusScreen extends StatelessWidget {
   final String nip;
@@ -47,6 +48,20 @@ class StatusScreen extends StatelessWidget {
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $url';
     }
+  }
+
+  void _navigateToRevisi(BuildContext context, String requestId, String documentType) {
+    // Navigate to the RevisiPermohonanScreen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RevisiPermohonanScreen(
+          nip: nip,
+          requestId: requestId,
+          documentType: documentType,
+        ),
+      ),
+    );
   }
 
   @override
@@ -148,7 +163,9 @@ class StatusScreen extends StatelessWidget {
                                     ? Colors.red
                                     : (submission['status'] == 'Disetujui'
                                         ? Colors.green
-                                        : Colors.yellow[800]),
+                                        : (submission['status'] == 'Perlu Direvisi'
+                                            ? Colors.brown
+                                            : Colors.yellow[800])),
                               ),
                             ),
                             SizedBox(height: 5),
@@ -192,6 +209,25 @@ class StatusScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     'Lihat Detail',
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(66, 129, 139, 1),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            if (submission['status'] == 'Perlu Direvisi')
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: TextButton(
+                                  onPressed: () => _navigateToRevisi(context, submission['requestId']!, submission['title']!),
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: Colors.grey.shade400,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Revisi Sekarang',
                                     style: TextStyle(
                                       color: Color.fromRGBO(66, 129, 139, 1),
                                     ),

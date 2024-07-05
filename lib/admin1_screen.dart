@@ -60,14 +60,14 @@ class Admin1Screen extends StatelessWidget {
                     SizedBox(height: 20),
                     Image.asset(
                       'assets/images/docuserv.png',
-                      width: 300,
-                      height: 150,
+                      width: 380,
+                      height: 170,
                     ),
                   ],
                 ),
               ),
               Positioned(
-                top: 95,
+                top: 106,
                 right: 30,
                 child: PopupMenuButton<String>(
                   onSelected: (String result) {

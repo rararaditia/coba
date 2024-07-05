@@ -3,14 +3,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'penolakan.dart';
 import 'penerimaan.dart';
+import 'revisi.dart'; // Import the Revisi screen
 
 class ReviewScreen extends StatelessWidget {
   final String nip;
   final String keperluan;
   final String? doktambahan;
-  final String requestId; // Add this
+  final String requestId;
 
-  ReviewScreen({required this.nip, required this.keperluan, this.doktambahan, required this.requestId});
+  ReviewScreen({
+    required this.nip,
+    required this.keperluan,
+    this.doktambahan,
+    required this.requestId,
+  });
 
   Future<String> _getUserName(String nip) async {
     String userName = '';
@@ -181,51 +187,83 @@ class ReviewScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PengajuanDitolakScreen(nip: nip, requestId: requestId),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PengajuanDitolakScreen(nip: nip, requestId: requestId),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red,
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
                                 ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red,
-                              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
                               ),
-                            ),
-                            child: Text(
-                              'Tolak',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
+                              child: Text(
+                                'Tolak',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SubmitDokumenScreen(nip: nip, requestId: requestId),
+                          SizedBox(width: 10), // Add some spacing between buttons
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RevisiDokumenScreen(nip: nip, requestId: requestId),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.orange,
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
                                 ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
-                              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Text(
+                                'Revisi',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                            child: Text(
-                              'Terima',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
+                          ),
+                          SizedBox(width: 10), // Add some spacing between buttons
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SubmitDokumenScreen(nip: nip, requestId: requestId),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                              ),
+                              child: Text(
+                                'Terima',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

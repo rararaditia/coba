@@ -122,6 +122,24 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
+          Positioned(
+            top: 15,
+            left: 20,
+            child: Image.asset(
+              'assets/images/logo.png',
+              width: 150,
+              height: 150,
+            ),
+          ),
+          Positioned(
+            bottom: -40,
+            left: -10,
+            right: -5,
+            child: Image.asset(
+              'assets/images/wave.png',
+              fit: BoxFit.cover,
+            ),
+          ),
           Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
@@ -129,17 +147,19 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Image.asset(
+                    'assets/images/docuserv.png',
+                    width: 380, // Adjust the width and height as needed
+                    height: 180,
+                    fit: BoxFit.contain,
+                  ),
+                  SizedBox(height: 0), // Add spacing between images
+                  Image.asset(
                     'assets/images/doc.png',
                     width: 300, // Adjust the width and height as needed
                     height: 150,
                     fit: BoxFit.contain,
                   ),
-                  Image.asset(
-                    'assets/images/docuserv.png',
-                    width: 300, // Adjust the width and height as needed
-                    height: 150,
-                    fit: BoxFit.contain,
-                  ),
+                  SizedBox(height: 20), // Adjust spacing between the image and text fields
                   TextField(
                     controller: _usernameController,
                     decoration: InputDecoration(
@@ -195,7 +215,7 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () => _login(context),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                      backgroundColor: Color.fromARGB(255, 106, 134, 134),
+                      backgroundColor: Color.fromARGB(255, 183, 219, 219),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -205,21 +225,12 @@ class LoginScreen extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.white,
+                        color: Color.fromARGB(255, 15, 124, 143),
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
-          ),
-          Positioned(
-            top: 15,
-            left: 20,
-            child: Image.asset(
-              'assets/images/logo.png',
-              width: 150,
-              height: 150,
             ),
           ),
         ],

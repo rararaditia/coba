@@ -65,10 +65,22 @@ class _HomeScreenState extends State<HomeScreen> {
         .collection('request')
         .where('nip', isEqualTo: widget.nip)
         .where('tipedok', isEqualTo: documentType)
-        .where('status', isEqualTo: 'Dalam Proses')
         .get();
 
-    if (querySnapshot.docs.isNotEmpty) {
+    bool hasInProgressRequest = false;
+    bool hasRevisiRequest = false;
+
+    for (var doc in querySnapshot.docs) {
+      if (doc['status'] == 'Dalam Proses') {
+        hasInProgressRequest = true;
+        break;
+      } else if (doc['status'] == 'Perlu Direvisi') {
+        hasRevisiRequest = true;
+        break;
+      }
+    }
+
+    if (hasInProgressRequest) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -76,6 +88,25 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Text("Peringatan"),
             content: Text(
                 "Anda sudah memiliki permohonan dengan tipe dokumen yang sama yang sedang diproses. Harap tunggu sampai permohonan sebelumnya selesai diproses."),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else if (hasRevisiRequest) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Peringatan"),
+            content: Text(
+                "Ada pengajuan dengan tipe yang sama yang perlu anda revisi. Segera revisi."),
             actions: <Widget>[
               TextButton(
                 child: Text("OK"),
@@ -208,11 +239,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   top: 60,
                   left: 20,
                   child: Transform.translate(
-                    offset: Offset(-45.0, 45.0),
+                    offset: Offset(-30.0, 40.0),
                     child: Image.asset(
                       'assets/images/docuserv.png',
-                      width: 250,
-                      height: 100,
+                      width: 270,
+                      height: 120,
                       fit: BoxFit.contain,
                     ),
                   ),
